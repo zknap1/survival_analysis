@@ -8,7 +8,7 @@ library(tidyverse)
 library(gridExtra)
 
 
-source("420810-Knapekova_Zuzana-funkcie-analprez-2018.R")
+source("functions.R")
 #devtools::install_github('datarootsio/artyfarty')
 
 # AFT modely  -----------------------------------------
@@ -38,8 +38,8 @@ df4 <- df1 %>%  mutate(Type = "S(t)") %>%
 
 g1<-ggplot(df4,aes(y = Variable,x = dates,color = Type)) + 
   geom_line(size=0.75) +
-  xlab("Cas")+ylab("Funkcia preûÌvania")+
-  #labs(title=expression("Funkcia preûÌvania pre rÙzne hodnoty"~eta))+
+  xlab("Cas")+ylab("Funkcia pre≈æ√≠vania")+
+  #labs(title=expression("Funkcia pre≈æ√≠vania pre r√¥zne hodnoty"~eta))+
   scale_colour_manual("", values=c("blue", "black", "red"),
                       breaks = c("S(t/1.5)", "S(t)", "S(t*1.5)"),
                       labels=c(expression(phantom(x)*eta==3/2), expression(phantom(x)*eta==1), expression(phantom(x)*eta==2/3)))+
@@ -51,8 +51,8 @@ g1<-ggplot(df4,aes(y = Variable,x = dates,color = Type)) +
 
 g2<-ggplot(df4,aes(y = risk,x = dates,color = Type)) + 
   geom_line(size=0.75) +
-  xlab("Cas")+ylab("Rizikov· funkcia")+
-  #labs(title=expression("Rizikov· funkcia pre rÙzne hodnoty"~eta))+
+  xlab("Cas")+ylab("Rizikov√° funkcia")+
+  #labs(title=expression("Rizikov√° funkcia pre r√¥zne hodnoty"~eta))+
   scale_colour_manual("", values=c("blue", "black", "red"),
                       breaks = c("S(t/1.5)", "S(t)", "S(t*1.5)"),
                       labels=c(expression(phantom(x)*eta==3/2), expression(phantom(x)*eta==1), expression(phantom(x)*eta==2/3)))+
@@ -124,7 +124,7 @@ df4 <- df1 %>%  mutate(Type = "lambda==0.5") %>%
 ggplot(df4,aes(y = Variable,x = dates,color = Type)) + 
   geom_line(size=0.75) +
   xlab("Cas")+ylab("Riziko")+
-  #labs(title=expression("Rizikov· funkcia Weibullovho rozdelenia pre rÙzne hodnoty"~alpha))+
+  #labs(title=expression("Rizikov√° funkcia Weibullovho rozdelenia pre r√¥zne hodnoty"~alpha))+
   scale_colour_manual("", values=c("red", "blue", "green"),
                       breaks = c("lambda==0.5", "lambda==1", "lambda==1.5"),
                       labels=c(bquote(alpha==0.5), bquote(alpha==1), bquote(alpha==1.5)))+
@@ -137,7 +137,7 @@ ggplot(df4,aes(y = Variable,x = dates,color = Type)) +
 
 
 
-# Priklad - Log-logistickÈ rozdelenie -------------------------------------
+# Priklad - Log-logistick√© rozdelenie -------------------------------------
 
 
 
@@ -172,7 +172,7 @@ df4 <- df1 %>%  mutate(Type = "sigma==0.5") %>%
 ggplot(df4,aes(y = Variable,x = dates,color = Type)) + 
   geom_line(size=0.75) +
   xlab("Cas")+ylab("Riziko")+
-  #labs(title=expression("Rizikov· funkcia log-logistickÈho rozdelenia pre rÙzne hodnoty"~kappa))+
+  #labs(title=expression("Rizikov√° funkcia log-logistick√©ho rozdelenia pre r√¥zne hodnoty"~kappa))+
   scale_colour_manual("", values=c("red", "blue", "green"),
                       breaks = c("sigma==0.5", "sigma==1", "sigma==2"),
                       labels=c(bquote(kappa==0.5), bquote(kappa==1), bquote(kappa==2)))+
@@ -185,7 +185,7 @@ ggplot(df4,aes(y = Variable,x = dates,color = Type)) +
 
 
 
-# Log-norm·lne rozdelenie -------------------------------------------------
+# Log-norm√°lne rozdelenie -------------------------------------------------
 
 log.normal.hazard<-function(x, mu, sigma){
   #arg<-(log(x)-mu)/sigma
@@ -225,7 +225,7 @@ df4 <- df1 %>%  mutate(Type = "sigma==0.5") %>%
 ggplot(df4,aes(y = Variable,x = dates,color = Type)) + 
   geom_line(size=0.75)+
   xlab("Cas")+ylab("Riziko")+
- # labs(title=expression("Rizikov· funkcia log-norm·lneho rozdelenia pre rÙzne hodnoty"~sigma))+
+ # labs(title=expression("Rizikov√° funkcia log-norm√°lneho rozdelenia pre r√¥zne hodnoty"~sigma))+
   scale_colour_manual("", values=c("red", "blue", "green"),
                       breaks = c("sigma==0.5", "sigma==1", "sigma==2"),
                       labels=c(bquote(sigma==0.5), bquote(sigma==1), bquote(sigma==2)))+
@@ -254,7 +254,7 @@ g1<-ggplot() +
   #scale_y_continuous(limit = c(0,3.5)) +
   xlab("ln(t)")+
   ylab (expression(Phi^{-1}~"(exp(-"~hat(H)~"(t)))")) + 
-  #ggtitle("Vhodne zvolen˝ model")+
+  #ggtitle("Vhodne zvolen√Ω model")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -276,7 +276,7 @@ g2<-ggplot() +
   #scale_y_continuous(limit = c(0,3.5)) +
   xlab("ln(t)")+
   ylab (expression(Phi^{-1}~"(exp(-"~hat(H)~"(t)))")) + 
-  #ggtitle("Nevhodne zvolen˝ model")+
+  #ggtitle("Nevhodne zvolen√Ω model")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -338,9 +338,9 @@ ggplot() +
   #geom_line(data = df, mapping = aes(x = gr1, y =gr1))+
   #scale_x_continuous(limit = c(0,12)) +
   #scale_y_continuous(limit = c(0,12)) +
-  xlab("OdhadnutÈ percentily pre skupinu 1")+
-  ylab ("OdhadnutÈ percentily pre skupinu 2") + 
-  ggtitle("Kvantilov˝ graf")+
+  xlab("Odhadnut√© percentily pre skupinu 1")+
+  ylab ("Odhadnut√© percentily pre skupinu 2") + 
+  ggtitle("Kvantilov√Ω graf")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -351,9 +351,9 @@ ggplot() +
   #geom_line(data = df, mapping = aes(x = gr1, y =gr1))+
   #scale_x_continuous(limit = c(0,12)) +
   #scale_y_continuous(limit = c(0,12)) +
-  xlab("OdhadnutÈ percentily pre skupinu 1")+
-  ylab ("OdhadnutÈ percentily pre skupinu 2") + 
-  ggtitle("Kvantilov˝ graf")+
+  xlab("Odhadnut√© percentily pre skupinu 1")+
+  ylab ("Odhadnut√© percentily pre skupinu 2") + 
+  ggtitle("Kvantilov√Ω graf")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -413,9 +413,9 @@ g2<-ggplot(data = df, mapping = aes(x = sort.result1., y =sort.result2.)) +
   geom_line(data = df, mapping = aes(x = sort.result1., y =sort.result2.))+
   #scale_x_continuous(limit = c(0,12)) +
   #scale_y_continuous(limit = c(0,12)) +
-  xlab("OdhadnutÈ percentily pre skupinu 1")+
-  ylab ("OdhadnutÈ percentily pre skupinu 2") + 
-  #ggtitle("Kvantilov˝ graf")+
+  xlab("Odhadnut√© percentily pre skupinu 1")+
+  ylab ("Odhadnut√© percentily pre skupinu 2") + 
+  #ggtitle("Kvantilov√Ω graf")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -471,9 +471,9 @@ ggplot() +
   #geom_line(data = df, mapping = aes(x = gr1, y =gr1))+
   #scale_x_continuous(limit = c(0,181)) +
   #scale_y_continuous(limit = c(0,181)) +
-  xlab("OdhadnutÈ percentily pre skupinu 1")+
-  ylab ("OdhadnutÈ percentily pre skupinu 2") + 
-  ggtitle("Kvantilov˝ graf")+
+  xlab("Odhadnut√© percentily pre skupinu 1")+
+  ylab ("Odhadnut√© percentily pre skupinu 2") + 
+  ggtitle("Kvantilov√Ω graf")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -530,9 +530,9 @@ ggplot() +
   #geom_line(data = df, mapping = aes(x = gr1, y =gr1))+
   #scale_x_continuous(limit = c(0,12)) +
   #scale_y_continuous(limit = c(0,12)) +
-  xlab("OdhadnutÈ percentily pre skupinu 1")+
-  ylab ("OdhadnutÈ percentily pre skupinu 2") + 
-  ggtitle("Kvantilov˝ graf")+
+  xlab("Odhadnut√© percentily pre skupinu 1")+
+  ylab ("Odhadnut√© percentily pre skupinu 2") + 
+  ggtitle("Kvantilov√Ω graf")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -543,9 +543,9 @@ ggplot(data = df, mapping = aes(x = sort.result1., y =sort.result2.)) +
   geom_line(data = df, mapping = aes(x = gr1, y =gr1))+
   #scale_x_continuous(limit = c(0,12)) +
   #scale_y_continuous(limit = c(0,12)) +
-  xlab("OdhadnutÈ percentily pre skupinu 1")+
-  ylab ("OdhadnutÈ percentily pre skupinu 2") + 
-  #ggtitle("Kvantilov˝ graf")+
+  xlab("Odhadnut√© percentily pre skupinu 1")+
+  ylab ("Odhadnut√© percentily pre skupinu 2") + 
+  #ggtitle("Kvantilov√Ω graf")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -603,9 +603,9 @@ g1<-ggplot(data = df, mapping = aes(x = sort.result1., y =sort.result2.)) +
   geom_line(data = df, mapping = aes(x = sort.result1., y =sort.result2.))+
   scale_x_continuous(limit = c(0,115)) +
   scale_y_continuous(limit = c(0,800)) +
-  xlab("OdhadnutÈ percentily pre skupinu 1")+
-  ylab ("OdhadnutÈ percentily pre skupinu 2") + 
-  #ggtitle("Kvantilov˝ graf")+
+  xlab("Odhadnut√© percentily pre skupinu 1")+
+  ylab ("Odhadnut√© percentily pre skupinu 2") + 
+  #ggtitle("Kvantilov√Ω graf")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -667,9 +667,9 @@ ggplot(data = df, mapping = aes(x = sort.result1., y =sort.result2.)) +
   geom_line(data = df, mapping = aes(x = sort.result1., y =sort.result2.))+
   #scale_x_continuous(limit = c(0,12)) +
   #scale_y_continuous(limit = c(0,12)) +
-  xlab("OdhadnutÈ percentily pre skupinu 1")+
-  ylab ("OdhadnutÈ percentily pre skupinu 2") + 
-  #ggtitle("Kvantilov˝ graf")+
+  xlab("Odhadnut√© percentily pre skupinu 1")+
+  ylab ("Odhadnut√© percentily pre skupinu 2") + 
+  #ggtitle("Kvantilov√Ω graf")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -699,7 +699,7 @@ ggplot(df, aes(x=log.t.f., y=log_CH)) +
   geom_line(linetype = "dashed")+
   geom_point(size=4, colour="white") + 
   geom_point(size=2) + 
-  xlab("Logaritmus Ëasu")+ylab("Log-kumulatÌvne riziko")+ggtitle("Graf log-kumulatÌvneho rizika oproti logaritmu Ëasu")+
+  xlab("Logaritmus √®asu")+ylab("Log-kumulat√≠vne riziko")+ggtitle("Graf log-kumulat√≠vneho rizika oproti logaritmu √®asu")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -726,8 +726,8 @@ category<-ifelse(HB <= 7, "1", ifelse(HB<=10, "2", ifelse(HB<=13, "3", "4")))
 
 fit<-survfit(Surv(time,status)~category,type="kaplan-meier")
 log_CH<-log(-log(fit$surv))
-plot(log(fit$time), log_CH, type="b", pch=19, lty=2, xlab="Logaritmus Ëasu", ylab="Log-kumulatÌvne riziko",
-     main="Graf log-kumulatÌvneho rizika pre rÙzne hodnoty hladiny hemoglobÌnu")
+plot(log(fit$time), log_CH, type="b", pch=19, lty=2, xlab="Logaritmus √®asu", ylab="Log-kumulat√≠vne riziko",
+     main="Graf log-kumulat√≠vneho rizika pre r√¥zne hodnoty hladiny hemoglob√≠nu")
 
 
 
@@ -740,8 +740,8 @@ category<- c(rep("1", 9), rep("2", 7), rep("3", 11), rep("4", 10))
 
 fit<-survfit(Surv(time,status)~category,type="kaplan-meier")
 log_CH<-log(-log(fit$surv))
-plot(log(fit$time), log_CH, type="b", pch=19, lty=2, xlab="Logaritmus Ëasu", ylab="Log-kumulatÌvne riziko",
-     main="Graf log-kumulatÌvneho rizika pre skupiny podæa dvoch kategori·lnych premenn˝ch")
+plot(log(fit$time), log_CH, type="b", pch=19, lty=2, xlab="Logaritmus √®asu", ylab="Log-kumulat√≠vne riziko",
+     main="Graf log-kumulat√≠vneho rizika pre skupiny pod¬æa dvoch kategori√°lnych premenn√Ωch")
 
 
 
@@ -758,8 +758,8 @@ head(alloauto)
 
 fit<-survfit(Surv(alloauto$time,alloauto$delta)~alloauto$type, ctype=1)
 log_CH<-log(fit$cumhaz)
-plot(fit$time, log_CH, type="s", xlab="Logaritmus Ëasu", ylab="Log-kumulatÌvne riziko",
-     main="Graf log-kumulatÌvneho rizika pre skupiny podæa dvoch kategori·lnych premenn˝ch", xlim=c(-2, 30))
+plot(fit$time, log_CH, type="s", xlab="Logaritmus √®asu", ylab="Log-kumulat√≠vne riziko",
+     main="Graf log-kumulat√≠vneho rizika pre skupiny pod¬æa dvoch kategori√°lnych premenn√Ωch", xlim=c(-2, 30))
 
 status.1<-alloauto$delta[alloauto$type=="1"]
 time.1<-alloauto$time[alloauto$type=="1"]
@@ -772,7 +772,7 @@ S.f<-fit$S
 t.f<-fit$T
 log_CH<-log(-log(S.f))
 
-cat<-rep("allo transplant·cia", length(t.f))
+cat<-rep("allo transplant√°cia", length(t.f))
 df1<-data.frame(t.f, log_CH, cat )
 
 fit2<-f.prezivania(time.2,status.2,type='KM')
@@ -780,7 +780,7 @@ S.f<-fit2$S
 t.f<-fit2$T
 log_CH<-log(-log(S.f))
 plot(t.f, log_CH, type="b", pch=19)
-cat<-rep("auto transplant·cia", length(t.f))
+cat<-rep("auto transplant√°cia", length(t.f))
 df2<-data.frame(t.f, log_CH, cat )
 df<-rbind(df2, df1)
 df$log<-log(df$t.f)
@@ -792,8 +792,8 @@ df$log<-log(df$t.f)
 g1<-ggplot(df, aes(x=t.f, y=log_CH)) +
    geom_step(aes(linetype = cat))+
   xlim(-1,25)+
-  xlab("»as")+ylab("Log-kumulatÌvne riziko")+
-  #ggtitle("Nesplnen˝ predpoklad")+
+  xlab("√àas")+ylab("Log-kumulat√≠vne riziko")+
+  #ggtitle("Nesplnen√Ω predpoklad")+
   theme_classic()+
   theme(legend.title = element_blank())+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12)) + theme(legend.position = "none") 
@@ -810,13 +810,13 @@ g1<-ggsurvplot(
   palette = c("#222224", "#222224"),
   #legend = "right",
   #legend.title = " ",
-  #legend.labs = c("Muûi", "éeny"),
+  #legend.labs = c("Mu≈æi", "≈Ωeny"),
   #xlim = c(1, 1000),
   axis.text = element_text(size = 10),
   axis.title = element_text(size = 12),
   legend.text = element_text(size = 16),
   legend="none",
-) + xlab("Logaritmus Ëasu") + ylab("Log-kumulatÌvne riziko")
+) + xlab("Logaritmus √®asu") + ylab("Log-kumulat√≠vne riziko")
 
 
 
@@ -862,7 +862,7 @@ ggplot(df, aes(x=basehaz1, y=b2)) +
   geom_step()+
   #geom_line()+
   xlim(c(0,1))+ylim(c(0,1))+
-  xlab("KumulatÌvne riziko pre skupinu 1")+ylab("KumulatÌvne riziko pre skupinu 2")+#ggtitle("KumulatÌvne rizik· v stratifikovanom Coxovom modeli")+
+  xlab("Kumulat√≠vne riziko pre skupinu 1")+ylab("Kumulat√≠vne riziko pre skupinu 2")+#ggtitle("Kumulat√≠vne rizik√° v stratifikovanom Coxovom modeli")+
   theme_classic()+
   geom_abline (slope = 1,
                intercept = 0,
@@ -890,7 +890,7 @@ S.f<-fit2$S
 t.f<-fit2$T
 CH2<-cum.risk(time.2, status.2)$L
 #plot(log(t.f), log_CH, type="b", pch=19)
-#cat<-rep("pozitÌvny", length(t.f))
+#cat<-rep("pozit√≠vny", length(t.f))
 #df2<-data.frame(log(t.f), log_CH, cat )
 
 df<-cbind(c(CH, rep(0.61998409, 7)), CH2)
@@ -920,13 +920,13 @@ ggplot() +
   geom_line(data = df2, aes(x = seq, y = seq.1), linetype="dashed")+
   #scale_x_continuous(limit = c(0,3.5)) +
   #scale_y_continuous(limit = c(0,3.5)) +
-  xlab("Cox-Snellove rezÌdu·")+
-  ylab ("Odhad kumulatÌvneho rizika na z·klade rezÌduÌ") + 
-  ggtitle("Graf log-kumulatÌvneho rizika Cox-Snellov˝ch rezÌduÌ")+
+  xlab("Cox-Snellove rez√≠du√°")+
+  ylab ("Odhad kumulat√≠vneho rizika na z√°klade rez√≠du√≠") + 
+  ggtitle("Graf log-kumulat√≠vneho rizika Cox-Snellov√Ωch rez√≠du√≠")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
-# vykreslenie martingalov˝ch rezÌduÌ
+# vykreslenie martingalov√Ωch rez√≠du√≠
 cox<-coxph(Surv(time,delta) ~ 1, 
          data=alloauto)
 alloauto$resid_mart <- residuals(cox, type = "martingale")
@@ -934,9 +934,9 @@ alloauto$resid_mart <- residuals(cox, type = "martingale")
 ggplot(data = alloauto, mapping = aes(x = type, y = resid_mart)) +
   geom_point() +
   geom_smooth() +
-  xlab("Typ transplnt·cie")+
-  ylab ("MartingalovÈ rezÌdu·") + 
-  ggtitle("Graf log-kumulatÌvneho rizika Cox-Snellov˝ch rezÌduÌ")+
+  xlab("Typ transplnt√°cie")+
+  ylab ("Martingalov√© rez√≠du√°") + 
+  ggtitle("Graf log-kumulat√≠vneho rizika Cox-Snellov√Ωch rez√≠du√≠")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -963,7 +963,7 @@ S.f<-fit$S
 t.f<-fit$T
 log_CH<-log(-log(S.f))
 plot(log(t.f), log_CH, type="b", pch=19)
-cat<-rep("negatÌvny", length(t.f))
+cat<-rep("negat√≠vny", length(t.f))
 df1<-data.frame(log(t.f), log_CH, cat )
 
 fit2<-f.prezivania(time.2,status.2,type='KM')
@@ -971,7 +971,7 @@ S.f<-fit2$S
 t.f<-fit2$T
 log_CH<-log(-log(S.f))
 plot(log(t.f), log_CH, type="b", pch=19)
-cat<-rep("pozitÌvny", length(t.f))
+cat<-rep("pozit√≠vny", length(t.f))
 df2<-data.frame(log(t.f), log_CH, cat )
 
 df<-rbind(df2, df1)
@@ -979,8 +979,8 @@ df<-rbind(df2, df1)
 
 g2<-ggplot(df, aes(x=log.t.f., y=log_CH)) +
   geom_step(aes(linetype = cat))+
-  xlab("Logaritmus Ëasu")+ylab("Log-kumulatÌvne riziko")+
-  ggtitle("Splnen˝ predpoklad")+
+  xlab("Logaritmus √®asu")+ylab("Log-kumulat√≠vne riziko")+
+  ggtitle("Splnen√Ω predpoklad")+
   theme_classic()+
   theme(legend.title = element_blank())+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))+ theme(legend.position = "none")
@@ -1003,13 +1003,13 @@ g2<-
     palette = c("#222224", "#222224"),
     #legend = "right",
     #legend.title = " ",
-    #legend.labs = c("Muûi", "éeny"),
+    #legend.labs = c("Mu≈æi", "≈Ωeny"),
     xlim = c(1, 1000),
     axis.text = element_text(size = 10),
     axis.title = element_text(size = 12),
     legend.text = element_text(size = 16),
     legend="none",
-    ) + xlab("Logaritmus Ëasu") + ylab("Log-kumulatÌvne riziko")
+    ) + xlab("Logaritmus √®asu") + ylab("Log-kumulat√≠vne riziko")
 
 
 #ggpubr::ggpar(ggsurv, font.legend = list(size = 12, color = "black"))
@@ -1052,11 +1052,11 @@ df<-data.frame(m, r, time, delta)
 graf1<-ggplot(data = df) +
   geom_point(data = df, aes(x = time/365.25, y = m, colour=factor(delta))) +
   geom_line(aes(x=seq(0, max(time/365.25)+1, length=dim(df)[1]), y=rep(0, dim(df)[1])), linetype="dashed")+
-  xlab("»as")+
-  ylab ("martingalovÈ rezÌdu·") + 
+  xlab("√àas")+
+  ylab ("martingalov√© rez√≠du√°") + 
   scale_colour_manual("", values=c("red", "blue"),
                       breaks = c("0", "1"),
-                      labels=c("cenz˙ra", "udalosù"))+  theme_classic()+
+                      labels=c("cenz√∫ra", "udalos¬ù"))+  theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12),
         legend.text = element_text(size = 12))
 
@@ -1064,11 +1064,11 @@ graf1<-ggplot(data = df) +
 graf2<-ggplot(data = df) +
   geom_point(data = df, aes(x = time/365.25, y = r, colour=factor(delta))) +
   geom_line(aes(x=seq(0, max(time/365.25)+1, length=dim(df)[1]), y=rep(0, dim(df)[1])), linetype="dashed")+
-  xlab("»as")+
-  ylab ("deviaËnÈ rezÌdu·") + 
+  xlab("√àas")+
+  ylab ("devia√®n√© rez√≠du√°") + 
   scale_colour_manual("", values=c("red", "blue"),
                       breaks = c("0", "1"),
-                      labels=c("cenz˙ra", "udalosù"))+  theme_classic()+
+                      labels=c("cenz√∫ra", "udalos¬ù"))+  theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12),
         legend.text = element_text(size = 12))
 
@@ -1110,7 +1110,7 @@ lines(noMTX$time, log(noMTX$hazard),lty =1)
 
 
 
-# Cox-Snell rezÌdu· -------------------------------------------------------
+# Cox-Snell rez√≠du√° -------------------------------------------------------
 
 # Figure 11.1
 
@@ -1147,9 +1147,9 @@ p2<-ggplot() +
   geom_line(data = df2, aes(x = seq, y = seq.1), linetype="dashed")+
   scale_x_continuous(limit = c(0,3.5)) +
   scale_y_continuous(limit = c(0,3.5)) +
-  xlab("Cox-Snellove rezÌdu·")+
-  ylab ("Odhad kumulatÌvneho rizika na z·klade rezÌduÌ") + 
-  #ggtitle("Nevhodne zvolenÈho modelu")+
+  xlab("Cox-Snellove rez√≠du√°")+
+  ylab ("Odhad kumulat√≠vneho rizika na z√°klade rez√≠du√≠") + 
+  #ggtitle("Nevhodne zvolen√©ho modelu")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -1157,7 +1157,7 @@ plot(r.surv$time, (-log(r.surv$surv) - r.surv$time)/r.surv$std.err, type='l', co
      xlab='Residual', ylab=expression((hat(Lambda)(e)-e)/SE))
 
 
-# Cox-Snell rezÌdu· 2 -----------------------------------------------------
+# Cox-Snell rez√≠du√° 2 -----------------------------------------------------
 
 data(heart)
 
@@ -1232,9 +1232,9 @@ p1<-ggplot() +
   geom_line(data = df2, aes(x = seq, y = seq.1), linetype="dashed")+
   scale_x_continuous(limit = c(0,3.5)) +
   scale_y_continuous(limit = c(0,3.5)) +
-  labs(x = "Cox-Snellove rezÌdu·",
-       y = "Odhad kumulatÌvneho rizika na z·klade rezÌduÌ") +
-  #ggtitle("PrÌklad vhodne zvolenÈho modelu")+
+  labs(x = "Cox-Snellove rez√≠du√°",
+       y = "Odhad kumulat√≠vneho rizika na z√°klade rez√≠du√≠") +
+  #ggtitle("Pr√≠klad vhodne zvolen√©ho modelu")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -1322,7 +1322,7 @@ lines(lim, lim, col='red', lwd=2)
 
 
 
-# Martingalove rezÌdu· ----------------------------------------------------
+# Martingalove rez√≠du√° ----------------------------------------------------
 
 
 data(bmt)
@@ -1347,8 +1347,8 @@ ggplot(data = bonemarrow1, mapping = aes(x = z22, y = resid_mart)) +
   geom_point() +
   geom_line(data = df, aes(x = x, y = y), linetype="dashed", color="red")+
   xlab("Z")+
-  ylab ("martingalovÈ rezÌdu·") + 
-  ggtitle("Graf martingalov˝ch rezÌduÌ - kvadratick· z·vislosù")+
+  ylab ("martingalov√© rez√≠du√°") + 
+  ggtitle("Graf martingalov√Ωch rez√≠du√≠ - kvadratick√° z√°vislos¬ù")+
   theme_classic()+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
@@ -1376,8 +1376,8 @@ g1<-ggplot(data = df, mapping = aes(x = PBC.age, y = rr)) +
   geom_point() +
   geom_line(data = df2, aes(x = x, y = y), linetype="solid", color="red")+
   xlab(expression(Z[1]))+
-  ylab ("MartingalovÈ rezÌdu·") + 
-  #ggtitle("Graf martingalov˝ch rezÌduÌ - line·rna z·vislosù")+
+  ylab ("Martingalov√© rez√≠du√°") + 
+  #ggtitle("Graf martingalov√Ωch rez√≠du√≠ - line√°rna z√°vislos¬ù")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -1405,8 +1405,8 @@ g2<-ggplot(data = df, mapping = aes(x = PBC.bili, y = rr)) +
   geom_point() +
   geom_line(data = df2, aes(x = x, y = y), linetype="solid", color="red")+
   xlab(expression(Z[2]))+
-  ylab ("MartingalovÈ rezÌdu·") + 
-  #ggtitle("Graf martingalov˝ch rezÌduÌ - pribliûne logaritmick· z·vislosù")+
+  ylab ("Martingalov√© rez√≠du√°") + 
+  #ggtitle("Graf martingalov√Ωch rez√≠du√≠ - pribli≈æne logaritmick√° z√°vislos¬ù")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 grid.arrange(g1, g2, ncol=2)
@@ -1426,8 +1426,8 @@ g1<-ggplot(data = halibut, mapping = aes(x = Deldepth, y = martres)) +
   geom_point() +
   geom_line(data = df, aes(x = x, y = y), linetype="solid", color="red")+
   xlab("Z")+
-  ylab ("MartingalovÈ rezÌdu·") + 
-  ggtitle("Pred transform·ciou")+
+  ylab ("Martingalov√© rez√≠du√°") + 
+  ggtitle("Pred transform√°ciou")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -1440,8 +1440,8 @@ g2<-ggplot(data = halibut, mapping = aes(x = Depthcat, y = martres)) +
   geom_point() +
   geom_line(data = df, aes(x = x, y = y), linetype="solid", color="red")+
   xlab("Z")+
-  ylab ("martingalovÈ rezÌdu·") + 
-  ggtitle("Po transform·cii")+
+  ylab ("martingalov√© rez√≠du√°") + 
+  ggtitle("Po transform√°cii")+
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -1471,7 +1471,7 @@ test.ph <- cox.zph(res.cox)
 g2<-ggcoxdiagnostics(res.cox, type = "scaledsch",
                  linear.predictions = FALSE, ggtheme = theme_classic(), sline.lty ="solid",  hline.size=0.5, sline.size=0.7,
                  sline.col = "red", hline.col = "black", sline.alpha = 0, caption = "n")+ 
-  #ggtitle("Nesplnen˝ predpoklad")+
+  #ggtitle("Nesplnen√Ω predpoklad")+
   xlab("t")+
   ylab (expression(beta[2] (t)))+ theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -1483,7 +1483,7 @@ res.cox2 <- coxph(Surv(time, status) ~ Z1, data =  lung)
 g1<-ggcoxdiagnostics(res.cox2, type = "scaledsch",
                  linear.predictions = FALSE, ggtheme = theme_classic(), sline.lty ="solid",  hline.size=0.5, sline.size=0.7,
                  sline.col = "red", hline.col = "black", sline.alpha = 0, caption = "n")+ 
-  #ggtitle("Splnen˝ predpoklad")+
+  #ggtitle("Splnen√Ω predpoklad")+
   xlab("t")+
   ylab (expression(beta[1] (t)))+ theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
@@ -1502,7 +1502,7 @@ df2<-data.frame(time, resid)
 ggplot(data = df2, mapping = aes(x = time, y = resid)) +
   geom_point() +
   xlab("Cas")+
-  ylab ("martingalovÈ rezÌdu·") + 
+  ylab ("martingalov√© rez√≠du√°") + 
   theme_classic()+
   theme(plot.title=element_text(size=16,hjust=0.5),axis.text = element_text(size = 10),axis.title = element_text(size=12))
 
